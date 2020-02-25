@@ -11,7 +11,7 @@ unsigned MAX_POSITION = 2000; // sould be set manually from controller (Hold pro
 EncoderCounter encoder (green1Pin, blue1Pin);
 
 void ICACHE_RAM_ATTR l1gI();
-void ICACHE_RAM_ATTR l2bI();
+void ICACHE_RAM_ATTR l1bI();
 void setup()
 {
   // @TODO get last leg position from eeprom
@@ -24,13 +24,13 @@ void setup()
   pinMode(blue2Pin, INPUT_PULLUP);
   // ESP does not support multiple Interrupts to one pin (seccond one will overwrite the first one). So we should use only RISING interrupt
   attachInterrupt(green1Pin, l1gI, RISING);
-  attachInterrupt(blue1Pin, l2bI, RISING);
+  attachInterrupt(blue1Pin, l1bI, RISING);
 }
 void ICACHE_RAM_ATTR   l1gI()
 {
     encoder.greenRisingInterrupt();
 }
-void ICACHE_RAM_ATTR  l2bI()
+void ICACHE_RAM_ATTR  l1bI()
 {
     encoder.blueRisingInterrupt();
 }
